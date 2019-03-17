@@ -28,6 +28,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -95,6 +96,11 @@ public class MainController implements Initializable {
     private void loadBookTable(ActionEvent event) {
         loadWindow("/library/assistant/ui/listbook/book_list.fxml", "Book Table");
     }
+    @FXML
+    private void loadSettings2(ActionEvent event) {
+        loadWindow("/library/assistant/settings/settings.fxml", "Settings");
+    }
+    
 
     void loadWindow(String loc, String title) {
         try {
@@ -277,4 +283,46 @@ public class MainController implements Initializable {
         }
         }
     }
+
+    @FXML
+    private void renewBookOp(ActionEvent event) {
+        if(!isReadyForSubmission){
+            Alert alert=new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please select a book for Renew!");
+            alert.setContentText("");
+            alert.showAndWait();
+            return;
+        }
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Issue");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to RENEW ");
+        Optional<ButtonType> response = alert.showAndWait();
+        if (response.get() == ButtonType.OK) {
+        String ac="UPDATE ISSUE SET issueTime = CURRENT_TIMESTAMP, renew_count=renew_count+1 WHERE bookID='"+bookID.getText()+"'";
+            System.err.println(ac);
+            if(databaseHandler.execAction(ac)){
+                Alert alert1=new Alert(Alert.AlertType.INFORMATION);
+            alert1.setTitle("Sucess");
+            alert1.setHeaderText("Book has been Renewed");
+            alert1.setContentText("");
+            alert1.showAndWait();
+            }else{
+                Alert alert1=new Alert(Alert.AlertType.ERROR);
+            alert1.setTitle("Error");
+            alert1.setHeaderText("Book renewal failed!");
+            alert1.setContentText("");
+            alert1.showAndWait();
+            
+            }
+        }
+        
+    }
+
+    
+
+    
+
+   
 }

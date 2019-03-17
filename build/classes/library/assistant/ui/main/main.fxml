@@ -83,7 +83,7 @@
                         </ImageView>
                      </graphic>
                   </Button>
-                  <Button layoutX="10.0" layoutY="115.0" mnemonicParsing="false" prefHeight="150.0" prefWidth="204.0" text="Settings">
+                  <Button layoutX="10.0" layoutY="115.0" mnemonicParsing="false" onAction="#loadSettings2" prefHeight="150.0" prefWidth="204.0" text="Settings">
                      <graphic>
                         <ImageView fitHeight="72.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -215,7 +215,7 @@
                                  <bottom>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <JFXButton buttonType="RAISED" prefHeight="52.0" prefWidth="148.0" styleClass="setup-button" stylesheets="@main.css" text="RENEW">
+                                          <JFXButton buttonType="RAISED" onAction="#renewBookOp" prefHeight="52.0" prefWidth="148.0" styleClass="setup-button" stylesheets="@main.css" text="RENEW">
                                              <HBox.margin>
                                                 <Insets bottom="5.0" right="5.0" />
                                              </HBox.margin>
